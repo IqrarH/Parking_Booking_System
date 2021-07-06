@@ -1,0 +1,918 @@
+{
+	"info": {
+		"_postman_id": "cb8b425b-1f60-45be-a9f7-2c29a7c75556",
+		"name": "PMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"admin@gmail.com\",\r\n    \"password\":\"admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"talhaEjaz@gmail.com\",\r\n    \"password\":\"talha123\",\r\n    \"name\":\"talhaB\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/signup",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ShowAllUsers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI0OTcxNzE3fQ.W0R11y_z0xooAdESvQiZG0-pg1hrm_OaBRltHvwMvoA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/showAll",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"showAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/users/delete/talhaEjaz@gmail.com",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"delete",
+								"talhaEjaz@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGFsaGFAZ21haWwuY29tIiwiaWF0IjoxNjI1MTQ4MzgwfQ.ChQq38YtDvqHZpg7THyqX18uWLXVLj--uTJd2uwd0WI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newName\":\"umar qayyum\",\r\n    \"oldPassword\":\"pak123\",\r\n    \"newPassword\":\"pak1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Floor",
+			"item": [
+				{
+					"name": "addFloor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"floorNumber\":\"22\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/floors/addFloor",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"floors",
+								"addFloor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFloor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/floors/removeFloor/22",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"floors",
+								"removeFloor",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "showAllFloors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/floors/showAll",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"floors",
+								"showAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkAvailableSpots",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/floors/checkAvailableSpots/21",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"floors",
+								"checkAvailableSpots",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkAllAvailableSpots",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/floors/checkAllAvailableSpots",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"floors",
+								"checkAllAvailableSpots"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "addVehicle",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"owner\":\"hashir123@gmail.com\",\r\n    \"vehicleNumber\":\"LEW 7806\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/vehicles/addVehicle",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"vehicles",
+								"addVehicle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteVehicle",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/vehicles/removeVehicle/LEW 7806",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"vehicles",
+								"removeVehicle",
+								"LEW 7806"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "showAllVehicles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/vehicles/showAll",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"vehicles",
+								"showAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateVehicle",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"newOwner\":\"hashir@gmail.com\",\r\n    \"vehicleNumber\":\"LEW 7805\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/vehicles/updateVehicle",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"vehicles",
+								"updateVehicle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "showVehicle",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/vehicles/showVehicle/LEW 7805",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"vehicles",
+								"showVehicle",
+								"LEW 7805"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "addBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MDM3NTY5fQ.zzwPaF_dSl7yU1mMzC5qPkGAeR6Cx_jJW7IOzo8fyLs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\":\"hashir123@gmail.com\",\r\n    \"vehicle\":\"quia voluptas vitae sapiente voluptatem voluptates quisquam\",\r\n    \"bookingTime\":\"2021-07-02T12:30:00\",\r\n    \"bookingDuration\":14,\r\n    \"floor\":21,\r\n    \"spotNo\":15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/bookings/addBooking",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings",
+								"addBooking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MDM3NTY5fQ.zzwPaF_dSl7yU1mMzC5qPkGAeR6Cx_jJW7IOzo8fyLs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/bookings/viewBooking/LEW 7804",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings",
+								"viewBooking",
+								"LEW 7804"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "showAllBookings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MDM3NTY5fQ.zzwPaF_dSl7yU1mMzC5qPkGAeR6Cx_jJW7IOzo8fyLs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/bookings/showAllBookings/2/5",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings",
+								"showAllBookings",
+								"2",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleNumber\":\"LEW 7804\",\r\n    \"newBookingDuration\":94\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/bookings/updateBooking",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings",
+								"updateBooking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "calculateReceipt",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MTIyNzc5fQ.S9jXZesrm7PrIN60uCdcmiDl2RAnaU6UCAkKBSHFSMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/bookings/calculateReceipt/LEW 7804",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings",
+								"calculateReceipt",
+								"LEW 7804"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "calculateFine",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjI1MjA5MTUwfQ.9xHmphBNXmdYF3kdDXmsEkXmMyoxL3TJPnP7LRlSW98",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/bookings/calculateFine/LEW 7804",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings",
+								"calculateFine",
+								"LEW 7804"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
