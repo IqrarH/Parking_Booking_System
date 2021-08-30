@@ -1,15 +1,15 @@
 var mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator')
 const mongoosastic = require('mongoosastic')
-
+// TODO remove the keyword of booked
 var BookingSchema = new mongoose.Schema({
-    bookedFor:{type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    bookedForVehicle:{type: mongoose.Schema.Types.ObjectId, unique:true,ref: 'Vehicle'},
-    bookingTime:{type:Date, default: Date.now},
+    user:{type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // TODO rename this to user
+    vehicle:{type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle'}, // TODO rename this to vehicle
+    startingTime:{type:Date, default: Date.now}, 
     bookingDuration:{type:Number, required:true},
-    bookedFloor:{type: mongoose.Schema.Types.ObjectId, ref: 'Floor'},
+    floor:{type: mongoose.Schema.Types.ObjectId, ref: 'Floor'},
     bookedSpot:{type:Number, required:true},
-    isActive:{type:Boolean,required:true},
+    isActive:{type:Boolean,required:true},// TODO Look for the workaround
 });
 
 BookingSchema.plugin(uniqueValidator)

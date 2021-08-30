@@ -18,7 +18,7 @@ mongoose.connect(dbLink, {
             for(var i=0; i<100; i++){
                 let vehicle = Vehicle();
                 vehicle.owner = data[i]._id;
-                vehicle.vehicleNumber = faker.lorem.words(7);
+                vehicle.vehicleNumber = faker.vehicle.vrm();
                 vehicle.save().then((result) => console.log('Vehicle Added!'))
                 .catch((err) => console.log('Unable to add vehicle'))
             }

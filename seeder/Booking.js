@@ -16,16 +16,13 @@ mongoose.connect(dbLink, {
     const users = await User.find({role:1}).select('_id').exec();
     const floors = await Floor.find().select('_id').exec()
     const vehicles = await Vehicle.find().select('_id').exec();
-    console.log(users);
-    console.log(floors);
-    console.log(vehicles);
     for(var i=0; i<20; i++){
         booking = Booking();
-        booking.bookedFor = users[i]._id;
-        booking.bookedForVehicle = vehicles[i]._id;
-        booking.bookingTime = Date.now().toString();
+        booking.user = users[i]._id;
+        booking.vehicle = vehicles[i]._id;
+        booking.startingTime = Date.now().toString();
         booking.bookingDuration = 10;
-        booking.bookedFloor = floors[i]._id;
+        booking.floor = floors[i]._id;
         booking.bookedSpot = i+1;
         booking.isActive = true;
         booking.save().then((result)=>console.log('Booking Added')).catch((err)=>console.log(err));

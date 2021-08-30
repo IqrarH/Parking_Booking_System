@@ -7,6 +7,12 @@ const app = express();
 router.post('/addFloor',auth.isToken,auth.isUser,auth.isAdmin,(req,res)=>{
     let floor = Floor();
     floor.floorNumber = req.body.floorNumber;
+    for(var i=0;i<25;i++){
+        
+        floor.spots.fill()
+    }
+    // TODO  fill the default value here
+    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill 
     floor.save((err, result) => {
         if(!err){
             res.status(200).send({message: 'New Floor has been added'})

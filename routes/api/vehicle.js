@@ -8,19 +8,23 @@ const auth = require('../../middlewares/auth');
 const { authorize } = require('passport');
 const Floor = require('../../models/Floor');
 
-router.post('/addVehicle',auth.isToken,auth.isUser,auth.isAdmin,async(req,res)=>{
+router.post('/addVehicle',auth.isToken, auth.isUser, async(req,res)=>{
     //Vehicle.find().populate('owner').exec()
     const result = await User.findOne({email:req.body.owner}).exec();
-    let vehicle = Vehicle();
-    vehicle.owner = mongoose.Types.ObjectId(result._id);
-    vehicle.vehicleNumber = req.body.vehicleNumber;
-    vehicle.save((err,data)=>{
-        if(err){
-            res.status(203).send({message:'Not Added!! Vehicle with this number already exists'});
-        }else{
-            res.status(200).send({message:'Vehicle added successfully'});
-        }
-    })
+    if(!result){
+        res.status(203).send({message:'User does not exist, Please create account first to add vehicle'});
+    }else{
+        let vehicle = Vehicle();
+        vehicle.owner = mongoose.Types.ObjectId(result._id);
+        vehicle.vehicleNumber = req.body.vehicleNumber;
+        vehicle.save((err,data)=>{
+            if(err){
+                res.status(203).send({status: 203, message:'Not Added!! Vehicle with this number already exists'});
+            }else{
+                res.status(200).send({owner: result, status: 200, message:'Vehicle added successfully'});
+            }
+        })
+    }
 
 })
 router.put('/updateVehicle',auth.isToken,auth.isUser,auth.isAdmin,async(req,res)=>{

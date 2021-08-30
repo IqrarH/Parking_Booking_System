@@ -10,11 +10,11 @@ mongoose.connect(dbLink, {
     useCreateIndex: true
 })
 .then((result) => {
-    for(var i=1; i<=20; i++){
+    for(var i=0; i<=20; i++){
         let floor = Floor();
         floor.floorNumber = i;
         for(var j=1;j<=25;j++){
-            const isBooked = true;
+            const isBooked = false;
             const spotNo = j;
             let newSpot = {isBooked,spotNo};
             spotsArray.push(newSpot);

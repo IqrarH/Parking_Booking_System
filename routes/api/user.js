@@ -9,10 +9,15 @@ const app = express();
 passport.use(localStrategy);
 router.use(passport.initialize());
 
-router.get('/login', passport.authenticate('local', {session:false}), (req, res) => {
+router.post('/login', passport.authenticate('local', {session:false}), (req, res) => {
     req.user.generateToken()
-    res.status(200).send({token: req.user.token, message: 'Welcome, You have logged in successfully'})
+    res.status(200).send({status:200, token: req.user.token, data: req.user, message: 'Welcome, You have logged in successfully'})
 })
+
+router.get('/',auth.isToken,auth.isUser,(req,res)=>{
+    res.status(200).send({status: 200, token:req.token, data: req.user});
+})
+
 router.delete('/delete/:email',auth.isToken,auth.isUser,auth.isAdmin,(req,res)=>{
     User.findOneAndDelete({email:req.params.email},function(err,data){
         if(err || data === null){
@@ -47,7 +52,7 @@ router.post('/signup', (req, res) => {
     user.save((err, result) => {
         if(!err){
             user.generateToken()
-            res.status(200).send({token: user.token, message: 'New Customer has been added'})
+            res.status(200).send({status: 200, token: user.token, data: user, message: 'New Customer has been added'})
         }
         else{
             console.log(err)
@@ -65,8 +70,5 @@ router.get('/showAll',  auth.isToken, auth.isUser, auth.isAdmin, (req, res) => {
     })
 })
 
-router.get('/',(req,res)=>{
-    res.send('PMS is ON!!!')
-})
 
 module.exports = router;

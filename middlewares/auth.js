@@ -1,5 +1,6 @@
 const jsonwebtoken = require('jsonwebtoken');
-const User = require('../models/User')
+const userType = require('../constants/userType');
+const User = require('../models/User');
 
 const isToken = function (req, res, next){
     var token = req.headers.authorization.split(' ')
@@ -12,6 +13,7 @@ const isToken = function (req, res, next){
                 res.status(401).send({message: 'You are not logged in'})
             }
             else{
+                req.token = token[1];
                 req.email = data.user
                 next()
             }
@@ -32,7 +34,9 @@ const isUser = function(req, res, next){
 }
 
 const isAdmin = function(req, res, next){
-    if(req.user.role === 0){
+    // TODO add contants folder and add an enum or const file for user types and get the user type from there
+    // if(req.user.role === userType.Admin)
+    if(req.user.role === userType.Admin){
         next()
     }
     else

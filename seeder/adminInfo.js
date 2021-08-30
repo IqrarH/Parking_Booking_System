@@ -27,3 +27,9 @@ mongoose.connect(dbLink, {
             .catch((err) => console.log(err))
     })
     .catch((err) => console.log(err))
+
+    // TODO create an index file here in this folder > export all arrays of enities to that index file
+    // create a seeder.js in root folder connect with mongoose from there only once and drop the database
+    // import all models there like app.js
+
+    // import arrays and seed entities in the series of usage like user and vehicle
