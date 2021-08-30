@@ -9,6 +9,10 @@ var UserSchema = new mongoose.Schema({
     email: {type: String, require: true, unique: true, index: true},
     password: {type: String, required: true},
     role: {type: Number, require: true, default: 1}, // TODO add enum here
+    //{
+    //     0 // Admin
+    //     1 // User
+    // }
 });
 
 UserSchema.plugin(uniqueValidator)

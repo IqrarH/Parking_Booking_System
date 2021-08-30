@@ -27,7 +27,7 @@ const isUser = function(req, res, next){
             res.status(401).send({message: 'You are not logged in'})
         }
         else{
-            req.user = user
+            req.user = user;
             next()
         }
     })   
