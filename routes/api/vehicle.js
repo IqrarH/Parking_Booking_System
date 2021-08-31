@@ -61,13 +61,26 @@ router.get('/showVehicle/:vehicleNumber',auth.isToken,auth.isUser,auth.isAdmin,(
     })
 })
 
-router.get('/showAll',auth.isToken,auth.isUser,auth.isAdmin,(req,res)=>{
-    Vehicle.find((err,data)=>{
+router.get('/showAll',auth.isToken,auth.isUser,auth.isAdmin, async(req,res)=>{
+
+    const page = +req.query.page || 1;
+    const limit = +req.query.limit || 10;
+    let count = 0;
+
+    await Vehicle.find().exec((err,vehicles) => {
+        count = vehicles.length;
+    })
+
+    await Vehicle.find()
+    .skip((page-1) * limit)
+    .limit(limit)
+    .populate('owner','name -_id')
+    .exec((err, data) => {
         if(err){
-            res.status(203).send({message: 'Unable to show Vehicles'})
+            res.status(203).send({status:203, message: 'Unable to show Vehicles'})
         }
         else{
-            res.status(200).send(data)
+            res.status(200).send({status:200, totalDocs:count, data:data})
         }
     })
 })
