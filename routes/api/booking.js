@@ -97,7 +97,7 @@ router.get('/calculateReceipt/:vehicleNumber',auth.isToken,auth.isUser,async(req
         res.status(203).send({status: 203, message:'No Booking found for the given number'})
     }
     var flag=0;
-    Booking.findOne({vehicle:mongoose.Types.ObjectId(vehicle._id)},
+    Booking.findOne({vehicle:mongoose.Types.ObjectId(vehicle._id), isActive: true},
     async function(err,data){
         if(err || data === null){
             res.status(203).send({status: 203, message:'No Booking found for the given number'});
@@ -108,7 +108,7 @@ router.get('/calculateReceipt/:vehicleNumber',auth.isToken,auth.isUser,async(req
                 {$set: {"spots.$[el]": {spotNo: data.bookedSpot, isBooked: false}}},
                 {arrayFilters: [ {"el.spotNo":data.bookedSpot}], new:true}
             )
-            await Booking.findOneAndUpdate({vehicle:mongoose.Types.ObjectId(vehicle._id)},
+            await Booking.findOneAndUpdate({vehicle:mongoose.Types.ObjectId(vehicle._id), isActive: true},
             {isActive:false},{new:true})
             var charges = data.bookingDuration * 5;
             res.status(200).send({bill: charges, message:'Your bill is '+charges+'$'});
@@ -121,8 +121,8 @@ router.get('/calculateFine/:vehicleNumber',auth.isToken,auth.isUser,async(req,re
     if(vehicle===null){
         res.status(203).send({status: 203, message:'No Booking found for the given number'})
     }
-    Booking.findOne({vehicle:mongoose.Types.ObjectId(vehicle._id)}).exec((err,data)=>{
-        if(err){
+    Booking.findOne({vehicle:mongoose.Types.ObjectId(vehicle._id), isActive: true}).exec((err,data)=>{
+        if(err || data === null){
             res.status(203).send({status: 203, message:'No Booking found for the given number'})
         }else{
             var bookingTime = moment(data.startingTime).local().format('YYYY-MM-DDTHH:mm:ss').toString();

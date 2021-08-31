@@ -61,10 +61,29 @@ router.post('/signup', (req, res) => {
     })
 })
 
+router.post('/addAdmin', auth.isToken, auth.isUser, auth.isAdmin, (req, res) => {
+    let user = User()
+    user.name = req.body.name
+    user.email = req.body.email
+    user.setPassword(req.body.password)
+    user.role=0
+    user.save((err, result) => {
+        if(!err){
+            user.generateToken()
+            res.status(200).send({status: 200, token: user.token, data: user, message: 'New Admin has been added'})
+        }
+        else{
+            console.log(err)
+            res.status(203).send({message: 'Email exists, try another one'})
+        }
+    })
+})
+
 router.get('/showAll',  auth.isToken, auth.isUser, auth.isAdmin, (req, res) => {
-    User.find((err, data) => {
-        if(!err)
-            res.status(200).send(data)
+    User.find((err, result) => {
+        if(!err){
+            res.status(200).send({totalDocs: result.length, data: result});
+        }
         else
             res.send(203).send({message: 'Sorry! There was a problem'})
     })

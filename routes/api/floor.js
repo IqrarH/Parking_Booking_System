@@ -3,19 +3,24 @@ const Floor = require('../../models/Floor');
 var router = express.Router();
 const auth = require('../../middlewares/auth');
 const app = express();
+let spotsArray=[];
 
 router.post('/addFloor',auth.isToken,auth.isUser,auth.isAdmin,(req,res)=>{
     let floor = Floor();
     floor.floorNumber = req.body.floorNumber;
-    for(var i=0;i<25;i++){
-        
-        floor.spots.fill()
+    for(var j=1;j<=25;j++){
+        const isBooked = false;
+        const spotNo = j;
+        let newSpot = {isBooked,spotNo};
+        spotsArray.push(newSpot);
     }
+    floor.spots = spotsArray;
+
     // TODO  fill the default value here
     //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill 
     floor.save((err, result) => {
         if(!err){
-            res.status(200).send({message: 'New Floor has been added'})
+            res.status(200).send({status: 200, message: 'New Floor has been added'})
         }
         else{
             console.log(err)
