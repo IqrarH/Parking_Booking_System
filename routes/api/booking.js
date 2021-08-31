@@ -53,39 +53,52 @@ router.get('/viewBooking/:vehicleNumber',auth.isToken,auth.isUser,auth.isAdmin,a
     if(vehicle===null){
         res.status(203).send({message:'No Booking found for the given number'})
     }
-    Booking.findOne({vehicle:mongoose.Types.ObjectId(vehicle._id)},{_id:false}).populate('user','name -_id').populate('vehicle','vehicleNumber -_id').populate('floor','floorNumber -_id').exec((err,booking)=>{
+    Booking.findOne({vehicle:mongoose.Types.ObjectId(vehicle._id), isActive: true}).populate('user','name -_id').populate('vehicle','vehicleNumber -_id').populate('floor','floorNumber -_id').exec((err,booking)=>{
         if(!err&&booking!==null){
-            res.status(200).send(booking);
+            res.status(200).send({status: 200, data: booking});
         }else{
-            res.status(203).send({message:'No Booking found for the given number'});
+            res.status(203).send({status: 203, message:'No Active Booking found for the given number'});
         }
     })
 })
 
-router.get('/showAllBookings/:pageNumber/:limit',auth.isToken,auth.isUser,auth.isAdmin,async(req,res)=>{
+router.get('/showAll',auth.isToken,auth.isUser,auth.isAdmin,async(req,res)=>{
+    const page = +req.query.page || 1;
+    const limit = +req.query.limit || 10;
+    let count = 0;
+
+    await Booking.find().exec((err,bookings) => {
+        count = bookings.length;
+    })
+
     await Booking.find().select('-_id')
-    .skip((+req.params.pageNumber-1) *  +req.params.limit)
-    .limit(+req.params.limit)
-    .populate('user','name -_id').populate('vehicle','vehicleNumber -_id').populate('floor','floorNumber -_id').exec((err,bookings)=>{
+    .skip((page-1) * limit)
+    .limit(limit)
+    .populate('user','name -_id')
+    .populate('vehicle','vehicleNumber -_id')
+    .populate('floor','floorNumber -_id')
+    .exec((err,bookings)=>{
         if(!err&&bookings!==null){
-            res.status(200).send(bookings);
+            res.status(200).send({totalDocs: count, status: 200, data: bookings});
         }else{
-            res.status(203).send({message:'Unable to show bookings'});
+            res.status(203).send({status: 203, message:'Unable to show bookings'});
         }
     })
 })
 
-router.put('/updateBooking',auth.isToken,auth.isUser,auth.isAdmin,async(req,res)=>{
-    const vehicle = await Vehicle.findOne({vehicleNumber:req.body.vehicleNumber}).exec()
+router.put('/updateBooking/:vehicleNumber',auth.isToken,auth.isUser,auth.isAdmin,async(req,res)=>{
+    console.log('API HIT');
+    console.log(req.body);
+    const vehicle = await Vehicle.findOne({vehicleNumber:req.params.vehicleNumber}).exec()
     if(vehicle===null){
-        res.status(203).send({message:'No Booking found for the given number'})
+        res.status(203).send({status:203, message:'No Booking found for the given number'})
     }
-    Booking.findOneAndUpdate({vehicle:mongoose.Types.ObjectId(vehicle._id)},
+    Booking.findOneAndUpdate({vehicle:mongoose.Types.ObjectId(vehicle._id), isActive: true},
     {bookingDuration:req.body.newBookingDuration},function(err,data){
         if(err || data === null){
-            res.status(203).send({message:'No Booking found for the given number'});
+            res.status(203).send({status:203, message:'No Booking found for the given number'});
         }else{
-            res.status(200).send({message:'Booking updated successfully'});
+            res.status(200).send({status:200, message:'Booking updated successfully'});
         }
     
     })
