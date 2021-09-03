@@ -30,6 +30,9 @@ router.post('/addFloor',auth.isToken,auth.isUser,auth.isAdmin,(req,res)=>{
 })
 router.get('/checkAvailableSpots/:floorNumber',auth.isToken,auth.isUser,async(req,res)=>{
     const data = await Floor.findOne({floorNumber:req.params.floorNumber}).exec()
+    if(!data){
+        res.status(203).send({status:203, message:'Floor Not Found'});
+    }
     const temp = data.spots
     var freeSpots="";
     for(var i=0;i<25;i++){
@@ -39,10 +42,10 @@ router.get('/checkAvailableSpots/:floorNumber',auth.isToken,auth.isUser,async(re
         }
     }
     if(freeSpots){
-        res.status(200).send({message:'Spots '+freeSpots+' are available on floor '+ req.params.floorNumber});
+        res.status(200).send({status: 200, message:'Spots '+freeSpots+' are available on floor '+ req.params.floorNumber});
     }
     else{
-        res.status(200).send({message:'No spots available on floor '+req.params.floorNumber+' currenlty'});
+        res.status(200).send({status: 203, message:'No spots available on floor '+req.params.floorNumber+' currenlty'});
     }
 })
 router.get('/checkAllAvailableSpots',auth.isToken,auth.isUser,async(req,res)=>{

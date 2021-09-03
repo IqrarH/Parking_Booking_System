@@ -44,10 +44,10 @@ router.delete('/removeVehicle/:vehicleNumber',auth.isToken,auth.isUser,auth.isAd
     Vehicle.deleteOne({vehicleNumber:req.params.vehicleNumber},
         function(err, data) {
             if(err){
-                res.status(203).send({message: 'Unable to delete Vehicle'})
+                res.status(203).send({status:203, message: 'Unable to delete Vehicle'})
             }
             else{
-                res.status(200).send({message: 'Vehicle has been deleted successfully'})
+                res.status(200).send({status:200, message: 'Vehicle has been deleted successfully'})
             }
     })
 })
