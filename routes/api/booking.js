@@ -87,8 +87,6 @@ router.get('/showAll',auth.isToken,auth.isUser,auth.isAdmin,async(req,res)=>{
 })
 
 router.put('/updateBooking/:vehicleNumber',auth.isToken,auth.isUser,auth.isAdmin,async(req,res)=>{
-    console.log('API HIT');
-    console.log(req.body);
     const vehicle = await Vehicle.findOne({vehicleNumber:req.params.vehicleNumber}).exec()
     if(vehicle===null){
         res.status(203).send({status:203, message:'No Booking found for the given number'})

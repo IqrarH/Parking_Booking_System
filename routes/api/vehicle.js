@@ -62,9 +62,8 @@ router.get('/showVehicle/:vehicleNumber',auth.isToken,auth.isUser,auth.isAdmin,(
 })
 
 router.get('/showAll',auth.isToken,auth.isUser,auth.isAdmin, async(req,res)=>{
-
     const page = +req.query.page || 1;
-    const limit = +req.query.limit || 10;
+    const limit = +req.query.limit || 20;
     let count = 0;
 
     await Vehicle.find().exec((err,vehicles) => {
